@@ -2,29 +2,30 @@
 
 
 def main():
-    find_sum('input1')
 
-
-def find_sum(path):
-    with open(path) as f:
+    with open('input1') as f:
         lines = [line.rstrip() for line in f]
 
     pairs = []
     for line in lines:
-        pair = ''
-        for char in line:
-            if char.isnumeric():
-                pair = pair+char
-                break
-        for char in reversed(line):
-            if char.isnumeric():
-                pair = pair+char
-                break
-        if pair != '':
-            pairs.append(int(pair))
+        num_list = ['' for i in range(len(line))]
+        num_list = store_numbers(line, num_list)
+        num_list = [num for num in num_list if num != '']
+        pairs.append(int(num_list[0]+num_list[-1]))
 
-    number = sum(pairs)
-    print(number)
+    solution = sum(pairs)
+    print(solution)
+    
+
+def store_numbers(string, num_list):
+    
+    for i, char in enumerate(string):
+        if char.isnumeric():
+            print(char)
+            num_list[i] = char
+            print(num_list)
+
+    return num_list
 
 
 if __name__ == "__main__":
